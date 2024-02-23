@@ -92,6 +92,12 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
             this.setMovementSpeed(0.75f);
         }
 
+        if(!this.hasPassengers() && !this.isOnGround()) {
+
+            this.setOnGround(true);
+
+        }
+
 
 
 
@@ -101,7 +107,7 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
         }
 
 
-
+        this.move(MovementType.SELF, new Vec3d(0,0,0));
 
 
         super.tick();
