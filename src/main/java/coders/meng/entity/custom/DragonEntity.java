@@ -47,6 +47,7 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.enableControl(Goal.Control.MOVE);
         this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 4f));
         this.goalSelector.add(6, new LookAroundGoal(this));
         this.goalSelector.add(1, new WanderAroundFarGoal(this, 0.20f, 45));
@@ -64,7 +65,7 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
 
             }
             if(this.hasPassengers() && !flyUpKey.isPressed() && world.getBlockState(new BlockPos(0,-1,0)).getBlock() == Blocks.AIR) {
-                this.setNoGravity(false);
+                this.setNoGravity(true);
                 this.setMovementSpeed(0.75f);
             }
 
@@ -72,9 +73,16 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
                 this.setVelocity(0,-1,0);
             }
 
+
+
         }
+
+
+
         super.tick();
     }
+
+
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
@@ -137,7 +145,7 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.dragon.walk", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("dragon.walk", true));
             return PlayState.CONTINUE;
         }
 
