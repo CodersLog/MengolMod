@@ -61,14 +61,35 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
     }
 
 
+    @Override
+    public void travel(Vec3d pos) {
+        if (this.isAlive() && this.hasPassengers()) {
+
+            if(this.hasPassengers() && flyUpKey.wasPressed()) {
+                this.setPos(getX(),getY() +0.35,getZ());
+                this.setVelocity(0,1,0);
+
+            }
+            if(this.hasPassengers() && !flyUpKey.isPressed() && world.getBlockState(new BlockPos(0,-1,0)).getBlock() == Blocks.AIR) {
+                this.setNoGravity(false);
+                this.setMovementSpeed(0.75f);
+            }
+
+            if (flyDownKey.isPressed()) {
+                this.setVelocity(0,-1,0);
+            }
+
+        }
 
 
+            this.setVelocity(0,-1,0);
+        super.travel(pos);
+    }
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         if (!this.hasPassengers()) {
             player.startRiding(this);
-            this.hasPassengers();
             return super.interactMob(player, hand);
         }
 
@@ -78,41 +99,7 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
 
 
 
-    @Override
-    public void tick() {
 
-
-        if(this.hasPassengers() && flyUpKey.wasPressed()) {
-           this.setPos(getX(),getY() +0.35,getZ());
-           this.setVelocity(0,1,0);
-
-        }
-        if(this.hasPassengers() && !flyUpKey.isPressed() && world.getBlockState(new BlockPos(0,-1,0)).getBlock() == Blocks.AIR) {
-            this.setNoGravity(false);
-            this.setMovementSpeed(0.75f);
-        }
-
-        if(!this.hasPassengers() && !this.isOnGround()) {
-
-            this.setOnGround(true);
-
-        }
-
-
-
-
-
-        if (flyDownKey.isPressed()) {
-            this.setVelocity(0,-1,0);
-        }
-
-
-        this.move(MovementType.SELF, new Vec3d(0,0,0));
-
-
-        super.tick();
-
-    }
 
 
     public static DefaultAttributeContainer.Builder createAttributesDragon() {
@@ -121,8 +108,7 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
 
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 30)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.20f)
-                .add(EntityAttributes.HORSE_JUMP_STRENGTH,2);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.20f);
 
 
 
@@ -160,7 +146,7 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (!this.hasPassengers() && event.isMoving()) {
+        if (event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.dragon.walk", true));
             return PlayState.CONTINUE;
         }
@@ -169,16 +155,8 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
         return PlayState.CONTINUE;
     }
 
-    private <E extends IAnimatable> PlayState flyPredicate(AnimationEvent<E> event) {
-        if (world.getBlockState(new BlockPos(0,-1,0)).getBlock() == Blocks.AIR && event.getController().getAnimationState().equals(AnimationState.Stopped)) {
 
-            event.getController().markNeedsReload();
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.dragon.flyup", true));
 
-        }
-
-        return PlayState.CONTINUE;
-    }
 
 
 
@@ -187,10 +165,6 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
     public void registerControllers(AnimationData animationData) {
         animationData.addAnimationController(new AnimationController(this, "controller",
                 0, this::predicate));
-
-        animationData.addAnimationController(new AnimationController(this, "controller",
-                0, this::flyPredicate));
-
 
     }
 
