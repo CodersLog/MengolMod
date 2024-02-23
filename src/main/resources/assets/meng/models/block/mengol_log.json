@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "meng:block/mengol_log_top",
+    "side": "meng:block/mengol_log"
+  }
+}

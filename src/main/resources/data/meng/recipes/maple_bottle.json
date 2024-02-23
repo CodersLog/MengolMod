@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " W ",
+    "WRW",
+    " W "
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:sugar"
+    },
+    "R": {
+      "item": "meng:sap_bottle"
+    }
+  },
+  "result": {
+    "item": "meng:maple_bottle",
+    "count": 1
+  }
+}

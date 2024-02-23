@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "meng",
+	"version": "${version}",
+	"name": "Mengol",
+	"description": "Basic Mengol server mod",
+	"authors": [
+		"CodersLog"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/meng/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"coders.meng.Mengol"
+		],
+		"client": [
+			"coders.meng.MengolModClient"
+		],
+		"fabric-datagen": [
+			"coders.meng.MengolDataGenerator"
+		]
+	},
+	"mixins": [
+		"meng.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.6",
+		"minecraft": "~1.19.2",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
