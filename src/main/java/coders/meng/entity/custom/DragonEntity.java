@@ -1,21 +1,15 @@
 package coders.meng.entity.custom;
 
 import coders.meng.entity.MengolEntities;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.BlockStateParticleEffect;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -25,9 +19,7 @@ import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.example.entity.BikeEntity;
-import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -62,7 +54,8 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
 
 
     @Override
-    public void travel(Vec3d pos) {
+    public void tick() {
+
         if (this.isAlive() && this.hasPassengers()) {
 
             if(this.hasPassengers() && flyUpKey.wasPressed()) {
@@ -80,10 +73,7 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
             }
 
         }
-
-
-            this.setVelocity(0,-1,0);
-        super.travel(pos);
+        super.tick();
     }
 
     @Override
