@@ -151,7 +151,7 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
 
                 if(Boost.isPressed()) {
 
-                    this.setForwardSpeed(3);
+                    super.travel(new Vec3d(f, pos.y,f1 * 15));
 
                 }
 
