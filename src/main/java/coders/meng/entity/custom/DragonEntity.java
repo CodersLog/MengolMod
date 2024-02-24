@@ -1,21 +1,16 @@
 package coders.meng.entity.custom;
 
 import coders.meng.entity.MengolEntities;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.BlockStateParticleEffect;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -24,7 +19,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.example.entity.BikeEntity;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
@@ -40,8 +34,8 @@ import static coders.meng.event.KeyInputHandler.flyUpKey;
 
 
 
-public class DragonEntity extends BikeEntity implements IAnimatable {
-    public DragonEntity(EntityType<? extends BikeEntity> entityType, World world) {
+public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimationTickable {
+    public DragonEntity(EntityType<? extends AnimalEntity> entityType, World world) {
 
 
         super(entityType, world);
@@ -62,8 +56,6 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
 
 
 
-
-
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         if (!this.hasPassengers()) {
@@ -76,37 +68,59 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
         return super.interactMob(player, hand);
     }
 
-
+    @Override
+    public void tickMovement() {
+        super.tickMovement();
+    }
 
     @Override
-    public void tick() {
-
-
+    public void travel(Vec3d pos) {
+        LivingEntity livingentity = (LivingEntity) this.getControllingPassenger();
         if(this.hasPassengers() && flyUpKey.wasPressed()) {
-            this.setPos(getX(),getY() +0.35,getZ());
             this.setVelocity(0,1,0);
 
         }
         if(this.hasPassengers() && !flyUpKey.isPressed() && world.getBlockState(new BlockPos(0,-1,0)).getBlock() == Blocks.AIR) {
-            this.setNoGravity(false);
+            this.setNoGravity(true);
             this.setMovementSpeed(0.75f);
         }
-
-
-
-
 
         if (flyDownKey.isPressed()) {
             this.setVelocity(0,-1,0);
         }
 
+        if (!this.hasPassengers() || livingentity == null) {
+            this.airStrafingSpeed = 0.02f;
+            this.setNoGravity(false);
+            super.travel(pos);
+            return;
+            }
+            if (this.hasPassengers()) {
+                this.setYaw(livingentity.getYaw());
+                this.prevYaw = this.getYaw();
+                this.setPitch(livingentity.getPitch() * 0.5f);
+                this.setRotation(this.getYaw(), this.getPitch());
+                this.headYaw = this.bodyYaw = this.getYaw();
+                float f = livingentity.sidewaysSpeed * 0.5F;
+                float f1 = livingentity.forwardSpeed;
+                if (f1 <= 0.0F) {
+                    f1 *= 0.25F;
+                }
 
+                this.setMovementSpeed(0.3F);
+                super.travel(new Vec3d(f, -0.5 , f1));
 
-
-
-        super.tick();
-
+        }
     }
+    @Nullable
+    public Entity getControllingPassenger() {
+        return this.getPassengerList().isEmpty() ? null : this.getPassengerList().get(0);
+    }
+
+
+
+    @Override
+    public int tickTimer() { return age; }
 
 
     public static DefaultAttributeContainer.Builder createAttributesDragon() {
@@ -130,6 +144,8 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_ENDER_DRAGON_AMBIENT;
     }
+
+
 
     @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
@@ -192,6 +208,8 @@ public class DragonEntity extends BikeEntity implements IAnimatable {
     public AnimationFactory getFactory() {
         return factory;
     }
+
+
 
 
 }
