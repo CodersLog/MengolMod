@@ -37,6 +37,7 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
 
     private int fireballStrength = 1;
 
+
     public DragonEntity(EntityType<? extends AnimalEntity> entityType, World world) {
 
 
@@ -70,6 +71,8 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
         return super.interactMob(player, hand);
     }
 
+
+
     @Override
     public void tickMovement() {
         super.tickMovement();
@@ -84,7 +87,18 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
 
     @Override
     public void travel(Vec3d pos) {
+
+
+
+
+
         LivingEntity livingentity = (LivingEntity) this.getControllingPassenger();
+        if(this.hasPassengers()) {
+
+
+
+        }
+
         if(this.hasPassengers() && flyUpKey.wasPressed()) {
 
             this.setVelocity(0,1,0);
@@ -93,11 +107,17 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
         if(this.hasPassengers() && !flyUpKey.isPressed() && world.getBlockState(new BlockPos(0,-1,0)).getBlock() == Blocks.AIR) {
             this.setNoGravity(true);
             this.setMovementSpeed(3f);
+
         }
 
         if (flyDownKey.isPressed()) {
             this.setVelocity(0,-1,0);
+
         }
+
+
+
+
 
         Vec3d rotVec = this.getRotationVec(1.0f);
 
@@ -144,7 +164,18 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
         return this.getPassengerList().isEmpty() ? null : this.getPassengerList().get(0);
     }
 
+    @Override
+    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
 
+        if (this.hasPassengers()) {
+            for (Entity entity : this.getPassengersDeep()) {
+                entity.damage(DamageSource.FALL, 0);
+            }
+        }
+
+
+        return false;
+    }
 
     @Override
     public int tickTimer() { return age; }
@@ -176,7 +207,30 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
 
     @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
+    if(damageSource == DamageSource.FALL) {
+
         return damageSource == DamageSource.FALL || super.isInvulnerableTo(damageSource);
+
+    }
+       else if(damageSource == DamageSource.ON_FIRE) {
+
+        return damageSource == DamageSource.ON_FIRE || super.isInvulnerableTo(damageSource);
+
+        }
+    else if(damageSource == DamageSource.IN_FIRE) {
+
+        return damageSource == DamageSource.IN_FIRE || super.isInvulnerableTo(damageSource);
+
+        }
+    else if(damageSource == DamageSource.explosion(this)) {
+
+        return damageSource == DamageSource.explosion(this) || super.isInvulnerableTo(damageSource);
+
+        }
+
+
+        return false;
+
     }
 
     @Nullable
