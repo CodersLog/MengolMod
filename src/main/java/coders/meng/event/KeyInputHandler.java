@@ -11,10 +11,12 @@ public class KeyInputHandler {
     public static final String KEY_DRAGON_UP = "key.meng.flyUp";
     public static final String KEY_DRAGON_DOWN = "key.meng.flyDown";
     public static final String KEY_DRAGON_SHOOT = "key.meng.dragonshoot";
+    public static final String KEY_DRAGON_BOOST = "key.meng.dragonboost";
 
     public static KeyBinding flyUpKey;
     public static KeyBinding flyDownKey;
     public static KeyBinding ShootBallKey;
+    public static KeyBinding Boost;
 
     public static void registerKeyInputs() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
@@ -37,6 +39,13 @@ public class KeyInputHandler {
                 KEY_DRAGON_DOWN,
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_RIGHT_CONTROL,
+                KEY_CATEGORY_MENGOL
+        ));
+
+        Boost = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                KEY_DRAGON_BOOST,
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_LEFT_ALT,
                 KEY_CATEGORY_MENGOL
         ));
 

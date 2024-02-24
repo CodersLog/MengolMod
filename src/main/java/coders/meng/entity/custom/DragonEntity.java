@@ -93,11 +93,7 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
 
 
         LivingEntity livingentity = (LivingEntity) this.getControllingPassenger();
-        if(this.hasPassengers()) {
 
-
-
-        }
 
         if(this.hasPassengers() && flyUpKey.wasPressed()) {
 
@@ -106,8 +102,7 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
         }
         if(this.hasPassengers() && !flyUpKey.isPressed() && world.getBlockState(new BlockPos(0,-1,0)).getBlock() == Blocks.AIR) {
             this.setNoGravity(true);
-            this.setMovementSpeed(3f);
-
+            this.setMovementSpeed((float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED)*3);
         }
 
         if (flyDownKey.isPressed()) {
@@ -154,7 +149,13 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
                     f1 *= 0.25F;
                 }
 
-                this.setMovementSpeed(2.0F);
+                if(Boost.isPressed()) {
+
+                    this.setForwardSpeed(3);
+
+                }
+
+
                 super.travel(new Vec3d(f, pos.y , f1));
 
         }
