@@ -11,6 +11,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -29,12 +30,13 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import static coders.meng.event.KeyInputHandler.flyDownKey;
-import static coders.meng.event.KeyInputHandler.flyUpKey;
-
+import static coders.meng.event.KeyInputHandler.*;
 
 
 public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimationTickable {
+
+    private int fireballStrength = 1;
+
     public DragonEntity(EntityType<? extends AnimalEntity> entityType, World world) {
 
 
@@ -73,20 +75,45 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
         super.tickMovement();
     }
 
+
+
+    private int getFireballStrength() {
+
+        return this.fireballStrength;
+    }
+
     @Override
     public void travel(Vec3d pos) {
         LivingEntity livingentity = (LivingEntity) this.getControllingPassenger();
         if(this.hasPassengers() && flyUpKey.wasPressed()) {
+
             this.setVelocity(0,1,0);
 
         }
         if(this.hasPassengers() && !flyUpKey.isPressed() && world.getBlockState(new BlockPos(0,-1,0)).getBlock() == Blocks.AIR) {
             this.setNoGravity(true);
-            this.setMovementSpeed(0.75f);
+            this.setMovementSpeed(3f);
         }
 
         if (flyDownKey.isPressed()) {
             this.setVelocity(0,-1,0);
+        }
+
+        Vec3d rotVec = this.getRotationVec(1.0f);
+
+        double i = this.getX() + rotVec.x * 4.0;
+        double g = 0.5 + this.getBodyY(0.5);
+        double h = this.getZ() + rotVec.z * 4.0;
+
+
+
+        if(this.hasPassengers() && ShootBallKey.isPressed()) {
+
+            FireballEntity fireballEntity = new FireballEntity(world, this, i, g, h, this.getFireballStrength());
+            fireballEntity.setPosition(this.getX() + rotVec.x * 4.0, this.getBodyY(0.5) + 0.5, fireballEntity.getZ() + rotVec.z * 4.0);
+            world.spawnEntity(fireballEntity);
+
+
         }
 
         if (!this.hasPassengers() || livingentity == null) {
@@ -107,8 +134,8 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
                     f1 *= 0.25F;
                 }
 
-                this.setMovementSpeed(0.3F);
-                super.travel(new Vec3d(f, -0.5 , f1));
+                this.setMovementSpeed(2.0F);
+                super.travel(new Vec3d(f, pos.y , f1));
 
         }
     }
@@ -170,7 +197,7 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (!this.hasPassengers() && event.isMoving()) {
+        if (this.isOnGround() && event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.dragon.walk", true));
             return PlayState.CONTINUE;
         }
@@ -180,7 +207,7 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
     }
 
     private <E extends IAnimatable> PlayState flyPredicate(AnimationEvent<E> event) {
-        if (world.getBlockState(new BlockPos(0,-1,0)).getBlock() == Blocks.AIR && event.getController().getAnimationState().equals(AnimationState.Stopped)) {
+        if (!this.isOnGround() && event.getController().getAnimationState().equals(AnimationState.Stopped)) {
 
             event.getController().markNeedsReload();
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.dragon.flyup", true));
