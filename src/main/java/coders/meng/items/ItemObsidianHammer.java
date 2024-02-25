@@ -45,7 +45,7 @@ public class ItemObsidianHammer extends Item {
                 dragonentity.setPosition(blockpos.getX(),blockpos.getY(),blockpos.getZ());
                     world.spawnEntity(dragonentity);
 
-                    world.setBlockState(blockpos, Blocks.AIR.getDefaultState());
+                     world.setBlockState(blockpos, Blocks.AIR.getDefaultState());
 
 
 
