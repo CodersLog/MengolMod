@@ -27,6 +27,9 @@ public class MengolItems {
     public static final Item MAPLE_BOTTLE = registerItems("maple_bottle", new Item(
             new FabricItemSettings().group(MengolGroup.MENGOLGROUP).food(new FoodComponent.Builder().hunger(1).saturationModifier(3).alwaysEdible().statusEffect(new StatusEffectInstance(StatusEffects.SPEED,200,1),100).statusEffect(new StatusEffectInstance(StatusEffects.HASTE,200,1), 100).build())));
 
+    public static final Item OBSIDIANHAMMER = registerItems("obsidian_hammer", new ItemObsidianHammer(
+            new FabricItemSettings().group(MengolGroup.MENGOLGROUP)));
+
     private static Item registerItems(String name, Item item) {
 
         return Registry.register(Registry.ITEM, new Identifier(Mengol.MODID, name), item);
