@@ -187,7 +187,7 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
 
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 30)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.20f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1f)
                 .add(EntityAttributes.HORSE_JUMP_STRENGTH,2);
 
 
@@ -251,29 +251,38 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (this.isOnGround() && event.isMoving()) {
+        if (this.world.getBlockState(new BlockPos(this.getX(),this.getY() -1,this.getZ())).getBlock() != Blocks.AIR && event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.dragon.walk", true));
-            return PlayState.CONTINUE;
+            return PlayState.STOP;
         }
 
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.dragon.idle", true));
+
+        if(this.world.getBlockState(new BlockPos(this.getX(),this.getY() -1,this.getZ())).getBlock() != Blocks.AIR && !event.isMoving()) {
+
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.dragon.idle", true));
+
+
+            return PlayState.STOP;
+
+        }
         return PlayState.CONTINUE;
+
     }
 
     private <E extends IAnimatable> PlayState flyPredicate(AnimationEvent<E> event) {
-        if (!this.isOnGround() && event.getController().getAnimationState().equals(AnimationState.Stopped)) {
+        if (this.hasPassengers() && this.world.getBlockState(new BlockPos(this.getX(),this.getY() -1,this.getZ())).getBlock() == Blocks.AIR && event.getController().getAnimationState().equals(AnimationState.Stopped)) {
 
             event.getController().markNeedsReload();
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.dragon.flyup", true));
 
+
+            return PlayState.STOP;
         }
+
+
 
         return PlayState.CONTINUE;
     }
-
-
-
-
     @Override
     public void registerControllers(AnimationData animationData) {
         animationData.addAnimationController(new AnimationController(this, "controller",
