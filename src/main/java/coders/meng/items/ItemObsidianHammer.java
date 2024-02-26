@@ -1,6 +1,7 @@
 package coders.meng.items;
 
-import coders.meng.blocks.MengolBlocks;
+
+import coders.meng.entity.custom.DragonEggEntity;
 import coders.meng.entity.custom.DragonEntity;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Blocks;
@@ -16,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import static coders.meng.entity.MengolEntities.DRAGON;
+import static coders.meng.entity.MengolEntities.DRAGONEGG;
 
 
 public class ItemObsidianHammer extends Item {
@@ -41,9 +43,9 @@ public class ItemObsidianHammer extends Item {
 
             if (player != null) {
 
-                DragonEntity dragonentity = new DragonEntity(DRAGON, world);
-                dragonentity.setPosition(blockpos.getX(),blockpos.getY(),blockpos.getZ());
-                    world.spawnEntity(dragonentity);
+                DragonEggEntity dragoneggentity = new DragonEggEntity(DRAGONEGG, world);
+                dragoneggentity.setPosition(blockpos.getX(),blockpos.getY(),blockpos.getZ());
+                    world.spawnEntity(dragoneggentity);
 
                      world.setBlockState(blockpos, Blocks.AIR.getDefaultState());
 

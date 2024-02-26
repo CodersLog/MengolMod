@@ -1,6 +1,7 @@
 package coders.meng;
 
 import coders.meng.entity.MengolEntities;
+import coders.meng.entity.client.DragonEggRenderer;
 import coders.meng.entity.client.DragonRenderer;
 import coders.meng.event.KeyInputHandler;
 import net.fabricmc.api.ClientModInitializer;
@@ -12,5 +13,6 @@ public class MengolModClient implements ClientModInitializer {
 
         KeyInputHandler.register();
         EntityRendererRegistry.register(MengolEntities.DRAGON, DragonRenderer::new);
+        EntityRendererRegistry.register(MengolEntities.DRAGONEGG, DragonEggRenderer::new);
     }
 }

@@ -1,8 +1,10 @@
 package coders.meng;
 
+
 import coders.meng.blocks.MengolBlocks;
 import coders.meng.entity.MengolEntities;
 import coders.meng.entity.custom.DragonEntity;
+import coders.meng.entity.custom.DragonEggEntity;
 import coders.meng.items.MengolItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -23,5 +25,7 @@ public class Mengol implements ModInitializer {
 		GeckoLib.initialize();
 
 		FabricDefaultAttributeRegistry.register(MengolEntities.DRAGON, DragonEntity.createAttributesDragon());
+		FabricDefaultAttributeRegistry.register(MengolEntities.DRAGONEGG, DragonEntity.createAttributesDragon());
+
 	}
 }
