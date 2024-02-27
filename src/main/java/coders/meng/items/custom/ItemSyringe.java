@@ -25,7 +25,7 @@ public class ItemSyringe extends Item {
         if(entity.getType() == EntityType.PIG) {
 
             stack.setCount(stack.getCount() - 1 );
-            user.giveItemStack(MengolItems.BLOODSYRINGE.getDefaultStack());
+            user.giveItemStack(MengolItems.PIGBLOODSYRINGE.getDefaultStack());
 
         }
 

@@ -1,6 +1,6 @@
 package coders.meng.items.custom;
 
-import coders.meng.entity.custom.DragonEggEntity;
+import coders.meng.entity.custom.PigDragonEggEntity;
 import coders.meng.items.MengolItems;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Blocks;
@@ -9,14 +9,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import static coders.meng.entity.MengolEntities.DRAGONEGG;
+import static coders.meng.entity.MengolEntities.PIGDRAGONEGG;
 
-public class ItemBloodSyringe extends Item {
-    public ItemBloodSyringe(FabricItemSettings settings) {
+public class ItemPigBloodSyringe extends Item {
+    public ItemPigBloodSyringe(FabricItemSettings settings) {
         super(settings);
     }
     @Override
@@ -33,7 +32,7 @@ public class ItemBloodSyringe extends Item {
 
             if (player != null) {
 
-                DragonEggEntity dragoneggentity = new DragonEggEntity(DRAGONEGG, world);
+                PigDragonEggEntity dragoneggentity = new PigDragonEggEntity(PIGDRAGONEGG, world);
                 dragoneggentity.setPosition(blockpos.getX(),blockpos.getY(),blockpos.getZ());
                 world.spawnEntity(dragoneggentity);
                 item.setCount(item.getCount() - 1 );

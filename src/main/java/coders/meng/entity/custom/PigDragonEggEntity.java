@@ -17,12 +17,12 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import static coders.meng.entity.MengolEntities.DRAGON;
 
-public class DragonEggEntity extends AnimalEntity implements IAnimatable {
+public class PigDragonEggEntity extends AnimalEntity implements IAnimatable {
 
     private AnimationFactory factory = new AnimationFactory(this);
 
     public int hatchingTime = this.random.nextInt(6000) + 6000;
-    public DragonEggEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public PigDragonEggEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
     }
 

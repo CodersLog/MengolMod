@@ -1,7 +1,7 @@
 package coders.meng.items;
 
 import coders.meng.Mengol;
-import coders.meng.items.custom.ItemBloodSyringe;
+import coders.meng.items.custom.ItemPigBloodSyringe;
 import coders.meng.items.custom.ItemSyringe;
 import coders.meng.items.item.group.MengolGroup;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -11,7 +11,7 @@ import net.minecraft.util.registry.Registry;
 
 public class MengolItems {
 
-    public static final Item BLOODSYRINGE = registerItems("bloodsyringe", new ItemBloodSyringe(
+    public static final Item PIGBLOODSYRINGE = registerItems("pigbloodsyringe", new ItemPigBloodSyringe(
             new FabricItemSettings().group(MengolGroup.MENGOLGROUP)));
 
     public static final Item SYRINGE = registerItems("syringe", new ItemSyringe(

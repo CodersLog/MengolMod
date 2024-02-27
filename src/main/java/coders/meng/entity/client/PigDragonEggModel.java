@@ -1,25 +1,26 @@
 package coders.meng.entity.client;
 
 import coders.meng.Mengol;
-import coders.meng.entity.custom.DragonEggEntity;
+
+import coders.meng.entity.custom.PigDragonEggEntity;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
-public class DragonEggModel extends AnimatedGeoModel<DragonEggEntity> {
+public class PigDragonEggModel extends AnimatedGeoModel<PigDragonEggEntity> {
 
 
     @Override
-    public Identifier getModelResource(DragonEggEntity object) {
+    public Identifier getModelResource(PigDragonEggEntity object) {
         return new Identifier(Mengol.MODID, "geo/dragonegg.geo.json");
     }
 
     @Override
-    public Identifier getTextureResource(DragonEggEntity object) {
+    public Identifier getTextureResource(PigDragonEggEntity object) {
         return new Identifier(Mengol.MODID, "textures/entity/dragonegg.png");
     }
 
     @Override
-    public Identifier getAnimationResource(DragonEggEntity animatable) {
+    public Identifier getAnimationResource(PigDragonEggEntity animatable) {
         return null;
     }
 }
