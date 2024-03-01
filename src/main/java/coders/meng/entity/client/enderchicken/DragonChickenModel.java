@@ -1,5 +1,5 @@
-package coders.meng.entity.client;
-import coders.meng.entity.custom.ChickenDragonEntity;
+package coders.meng.entity.client.enderchicken;
+import coders.meng.entity.custom.enderchicken.ChickenDragonEntity;
 import coders.meng.Mengol;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.model.AnimatedGeoModel;

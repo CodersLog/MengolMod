@@ -1,8 +1,13 @@
 package coders.meng;
 
 import coders.meng.entity.MengolEntities;
-import coders.meng.entity.custom.ChickenDragonEntity;
-import coders.meng.entity.custom.DragonEntity;
+import coders.meng.entity.custom.enderchicken.ChickenDragonEntity;
+import coders.meng.entity.custom.dragon.DragonEntity;
+import coders.meng.entity.custom.endercow.CowDragonEntity;
+import coders.meng.entity.custom.endergolem.GolemDragonEntity;
+import coders.meng.entity.custom.enderskeleton.SkeletonDragonEntity;
+import coders.meng.entity.custom.nitrocreeper.CreeperDragonEntity;
+import coders.meng.entity.custom.venom.VenomDragonEntity;
 import coders.meng.items.MengolItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -31,7 +36,29 @@ public class Mengol implements ModInitializer {
 
 		FabricDefaultAttributeRegistry.register(MengolEntities.DRAGON, DragonEntity.createAttributesDragon());
 		FabricDefaultAttributeRegistry.register(MengolEntities.PIGDRAGONEGG, DragonEntity.createAttributesDragon());
-		FabricDefaultAttributeRegistry.register(MengolEntities.CHICKENDRAGON, ChickenDragonEntity.createAttributesChickenDragon());
 
+		//chicken
+		FabricDefaultAttributeRegistry.register(MengolEntities.CHICKENDRAGON, ChickenDragonEntity.createAttributesChickenDragon());
+		FabricDefaultAttributeRegistry.register(MengolEntities.CHICKENDRAGONEGG, ChickenDragonEntity.createAttributesChickenDragon());
+
+		//cow
+		FabricDefaultAttributeRegistry.register(MengolEntities.COWDRAGON, CowDragonEntity.createAttributesCowDragon());
+		FabricDefaultAttributeRegistry.register(MengolEntities.COWDRAGONEGG, ChickenDragonEntity.createAttributesChickenDragon());
+
+		//golem
+		FabricDefaultAttributeRegistry.register(MengolEntities.GOLEMDRAGON, GolemDragonEntity.createAttributesGolemDragon());
+		FabricDefaultAttributeRegistry.register(MengolEntities.GOLEMDRAGONEGG, ChickenDragonEntity.createAttributesChickenDragon());
+
+		//skeleton
+		FabricDefaultAttributeRegistry.register(MengolEntities.SKELETONDRAGON, SkeletonDragonEntity.createAttributesSkeletonDragon());
+		FabricDefaultAttributeRegistry.register(MengolEntities.SKELETONDRAGONEGG, ChickenDragonEntity.createAttributesChickenDragon());
+
+		//creeper
+		FabricDefaultAttributeRegistry.register(MengolEntities.CREEPERDRAGON, CreeperDragonEntity.createAttributesCreeperDragon());
+		FabricDefaultAttributeRegistry.register(MengolEntities.CREEPERDRAGONEGG, ChickenDragonEntity.createAttributesChickenDragon());
+
+		//venom
+		FabricDefaultAttributeRegistry.register(MengolEntities.VENOMDRAGON, VenomDragonEntity.createAttributesVenomDragon());
+		FabricDefaultAttributeRegistry.register(MengolEntities.VENOMDRAGONEGG, ChickenDragonEntity.createAttributesChickenDragon());
 	}
 }

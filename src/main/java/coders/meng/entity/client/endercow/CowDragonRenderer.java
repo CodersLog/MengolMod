@@ -1,8 +1,9 @@
-package coders.meng.entity.client;
+package coders.meng.entity.client.endercow;
 
 import coders.meng.Mengol;
-import coders.meng.entity.custom.ChickenDragonEntity;
-import coders.meng.entity.custom.DragonEntity;
+import coders.meng.entity.client.enderchicken.DragonChickenModel;
+import coders.meng.entity.custom.enderchicken.ChickenDragonEntity;
+import coders.meng.entity.custom.endercow.CowDragonEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -11,19 +12,19 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
-public class DragonChickenRenderer extends GeoEntityRenderer<ChickenDragonEntity> {
-    public DragonChickenRenderer(EntityRendererFactory.Context ctx) {
-        super(ctx, new DragonChickenModel());
+public class CowDragonRenderer extends GeoEntityRenderer<CowDragonEntity> {
+    public CowDragonRenderer(EntityRendererFactory.Context ctx) {
+        super(ctx, new CowDragonModel());
         this.shadowRadius = 0.4f;
     }
 
     @Override
-    public Identifier getTextureResource(ChickenDragonEntity instance) {
-        return new Identifier(Mengol.MODID, "textures/entity/chickendragon.png");
+    public Identifier getTextureResource(CowDragonEntity instance) {
+        return new Identifier(Mengol.MODID, "textures/entity/cowdragon.png");
     }
 
     @Override
-    public RenderLayer getRenderType(ChickenDragonEntity animatable, float partialTicks, MatrixStack stack,
+    public RenderLayer getRenderType(CowDragonEntity animatable, float partialTicks, MatrixStack stack,
                                      VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder,
                                      int packedLightIn, Identifier textureLocation) {
         stack.scale(0.8f, 0.8f, 0.8f);

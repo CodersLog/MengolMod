@@ -1,4 +1,4 @@
-package coders.meng.entity.custom;
+package coders.meng.entity.custom.dragon;
 
 import coders.meng.entity.MengolEntities;
 import net.minecraft.block.Blocks;

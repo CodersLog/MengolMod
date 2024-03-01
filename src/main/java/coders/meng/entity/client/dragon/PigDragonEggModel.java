@@ -1,8 +1,8 @@
-package coders.meng.entity.client;
+package coders.meng.entity.client.dragon;
 
 import coders.meng.Mengol;
 
-import coders.meng.entity.custom.PigDragonEggEntity;
+import coders.meng.entity.custom.dragon.PigDragonEggEntity;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 

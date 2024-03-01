@@ -1,11 +1,7 @@
-package coders.meng.entity.custom;
+package coders.meng.entity.custom.nitrocreeper;
 
 import coders.meng.Mengol;
-import coders.meng.entity.MengolEntities;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
@@ -17,20 +13,13 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -38,15 +27,12 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import static coders.meng.event.KeyInputHandler.*;
-import static coders.meng.event.KeyInputHandler.Boost;
-
-public class ChickenDragonEntity extends AnimalEntity implements IAnimatable {
+public class CreeperDragonEntity extends AnimalEntity implements IAnimatable {
 
     private int fireballStrength = 1;
 
 
-    public ChickenDragonEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public CreeperDragonEntity(EntityType<? extends AnimalEntity> entityType, World world) {
 
 
         super(entityType, world);
@@ -90,7 +76,7 @@ public class ChickenDragonEntity extends AnimalEntity implements IAnimatable {
 
 
 
-    public static DefaultAttributeContainer.Builder createAttributesChickenDragon() {
+    public static DefaultAttributeContainer.Builder createAttributesCreeperDragon() {
 
 
 

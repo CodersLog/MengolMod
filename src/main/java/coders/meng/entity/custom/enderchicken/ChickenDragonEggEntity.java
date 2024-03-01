@@ -1,14 +1,11 @@
-package coders.meng.entity.custom;
+package coders.meng.entity.custom.enderchicken;
 
+import coders.meng.entity.custom.dragon.DragonEntity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -17,12 +14,12 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import static coders.meng.entity.MengolEntities.DRAGON;
 
-public class PigDragonEggEntity extends AnimalEntity implements IAnimatable {
+public class ChickenDragonEggEntity extends AnimalEntity implements IAnimatable {
 
     private AnimationFactory factory = new AnimationFactory(this);
 
     public int hatchingTime = this.random.nextInt(6000) + 6000;
-    public PigDragonEggEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public ChickenDragonEggEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
     }
 

@@ -11,7 +11,7 @@ import net.minecraft.util.registry.Registry;
 
 public class MengolItems {
 
-    public static final Item PIGBLOODSYRINGE = registerItems("pigbloodsyringe", new ItemPigBloodSyringe(
+    public static final Item PIGBLOODSYRINGE = registerItems("pigbloodsyringe.json", new ItemPigBloodSyringe(
             new FabricItemSettings().group(MengolGroup.MENGOLGROUP)));
 
     public static final Item SYRINGE = registerItems("syringe", new ItemSyringe(
