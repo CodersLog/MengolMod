@@ -234,6 +234,12 @@ public class DragonEntity extends AnimalEntity implements IAnimatable, IAnimatio
 
         }
 
+    else if(damageSource == DamageSource.DRAGON_BREATH) {
+
+        return damageSource == DamageSource.DRAGON_BREATH || super.isInvulnerableTo(damageSource);
+
+        }
+
 
         return false;
 

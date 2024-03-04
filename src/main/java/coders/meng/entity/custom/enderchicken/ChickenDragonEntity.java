@@ -152,48 +152,49 @@ public class ChickenDragonEntity extends AnimalEntity implements IAnimatable{
     @Override
     public void tick() {
         super.tick();
-        if(MinecraftClient.getInstance().player != null) {
-
-            MinecraftClient.getInstance().player.sendChatMessage("entity needs to cooldown" + this.cooldown + "ticks to send new ball", null);
-        }
+        if (MinecraftClient.getInstance().player != null) {
 
 
-        LivingEntity livingEntity = world.getClosestPlayer(this,120);
+
+        PlayerEntity player = world.getClosestPlayer(this, 120);
+
+        if(player != null) {
+            if (!player.isCreative()) {
+
+                MinecraftClient.getInstance().player.sendChatMessage("entity needs to cooldown" + this.cooldown + "ticks to send new ball", null);
 
 
-        if(livingEntity != null) {
+                if (player.squaredDistanceTo(this) < 120 && !this.istame) {
 
+                    --this.cooldown;
 
-            if (livingEntity.squaredDistanceTo(this) < 120 && !this.istame) {
+                    if (this.cooldown <= 0) {
 
-                --this.cooldown;
+                        World world = this.getWorld();
 
-                if(this.cooldown <= 0) {
+                        this.lookAtEntity(player, 1, 1);
 
-                    World world = this.getWorld();
+                        Vec3d vec3d = this.getRotationVec(1.0f);
+                        double f = player.getX() - (this.getX() + vec3d.x * 1.2);
+                        double g = player.getBodyY(0.5) - (0.2 + this.getBodyY(0.2));
+                        double h = player.getZ() - (this.getZ() + vec3d.z * 1.2);
 
-                    this.lookAtEntity(livingEntity, 1, 1);
+                        DragonFireballEntity fireballEntity = new DragonFireballEntity(this.world,this,f,g,h );
+                        fireballEntity.setPosition(this.getX() + vec3d.x * 1.2, this.getBodyY(0.2) + 0.2, fireballEntity.getZ() + vec3d.z * 1.2);
+                        world.spawnEntity(fireballEntity);
 
-                    Vec3d vec3d = this.getRotationVec(1.0f);
-                    double f = livingEntity.getX() - (this.getX() + vec3d.x * 1.2);
-                    double g = livingEntity.getBodyY(0.5) - (0.2 + this.getBodyY(0.2));
-                    double h = livingEntity.getZ() - (this.getZ() + vec3d.z * 1.2);
+                        this.cooldown = 50;
 
-                    FireballEntity fireballEntity = new FireballEntity(world, this, f, g, h, 1);
-                    fireballEntity.setPosition(this.getX() + vec3d.x * 1.2, this.getBodyY(0.2) + 0.2, fireballEntity.getZ() + vec3d.z * 1.2);
-                    world.spawnEntity(fireballEntity);
-
-                    this.cooldown = 50;
+                    }
 
                 }
 
             }
+        }
 
         }
 
     }
-
-
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
@@ -238,6 +239,13 @@ public class ChickenDragonEntity extends AnimalEntity implements IAnimatable{
             return damageSource == DamageSource.FALL || super.isInvulnerableTo(damageSource);
 
         }
+
+        if(damageSource == DamageSource.DRAGON_BREATH) {
+
+            return damageSource == DamageSource.DRAGON_BREATH || super.isInvulnerableTo(damageSource);
+
+        }
+
         else if(damageSource == DamageSource.ON_FIRE) {
 
             return damageSource == DamageSource.ON_FIRE || super.isInvulnerableTo(damageSource);
@@ -267,6 +275,11 @@ public class ChickenDragonEntity extends AnimalEntity implements IAnimatable{
         return SoundEvents.ENTITY_ENDER_DRAGON_DEATH;
     }
 
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return Mengol.CHICKENDRAGONHURTEVENT;
+    }
 
     @Override
     public boolean cannotDespawn() {

@@ -3,5 +3,12 @@
     "sounds": [
       "meng:chickendragonscream"
     ]
+  },
+
+  "chickendragonhurt": {
+    "sounds": [
+      "meng:chickendragonhurt"
+    ]
   }
 }
+

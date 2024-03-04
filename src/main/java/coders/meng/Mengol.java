@@ -22,7 +22,15 @@ import software.bernie.geckolib3.GeckoLib;
 public class Mengol implements ModInitializer {
 
 	public static final Identifier CHICKENDRAGONSCREAM = new Identifier("meng:chickendragonscream");
+	public static final Identifier CHICKENDRAGONHURT = new Identifier("meng:chickendragonhurt");
+
+
+
 	public static SoundEvent CHICKENDRAGONSCREAMSOUNDEVENT = new SoundEvent(CHICKENDRAGONSCREAM);
+	public static SoundEvent CHICKENDRAGONHURTEVENT = new SoundEvent(CHICKENDRAGONHURT);
+
+
+
 	public static final String MODID = "meng";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 
@@ -30,6 +38,7 @@ public class Mengol implements ModInitializer {
 	public void onInitialize() {
 
 		Registry.register(Registry.SOUND_EVENT, CHICKENDRAGONSCREAM, CHICKENDRAGONSCREAMSOUNDEVENT);
+		Registry.register(Registry.SOUND_EVENT, CHICKENDRAGONHURT, CHICKENDRAGONHURTEVENT);
 
 		MengolItems.registerModItems();
 		GeckoLib.initialize();
