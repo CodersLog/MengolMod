@@ -12,6 +12,7 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import static coders.meng.entity.MengolEntities.CHICKENDRAGON;
 import static coders.meng.entity.MengolEntities.DRAGON;
 
 public class ChickenDragonEggEntity extends AnimalEntity implements IAnimatable {
@@ -36,7 +37,7 @@ public class ChickenDragonEggEntity extends AnimalEntity implements IAnimatable 
         if (!world.isClient && this.isAlive() && --this.hatchingTime <= 0) {
 
 
-            DragonEntity dragonentity = new DragonEntity(DRAGON, world);
+            ChickenDragonEntity dragonentity = new ChickenDragonEntity(CHICKENDRAGON, world);
             dragonentity.setPosition(this.getX(),this.getY(),this.getZ());
             world.spawnEntity(dragonentity);
             this.kill();
