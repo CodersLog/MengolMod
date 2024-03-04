@@ -1,6 +1,7 @@
 package coders.meng.entity.custom.enderchicken;
 
 import coders.meng.Mengol;
+import coders.meng.items.MengolItems;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityStatuses;
@@ -114,7 +115,7 @@ public class ChickenDragonEntity extends AnimalEntity implements IAnimatable{
         this.flapProgress += this.flapSpeed * 2.0f;
         if (!this.world.isClient && this.isAlive() && !this.isBaby()  && --this.eggLayTime <= 0) {
             this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
-            this.dropItem(Items.EGG);
+            this.dropItem(MengolItems.MUTATEDEGG);
             this.emitGameEvent(GameEvent.ENTITY_PLACE);
             this.eggLayTime = this.random.nextInt(6000) + 6000;
         }
@@ -160,9 +161,6 @@ public class ChickenDragonEntity extends AnimalEntity implements IAnimatable{
 
         if(player != null) {
             if (!player.isCreative()) {
-
-                MinecraftClient.getInstance().player.sendChatMessage("entity needs to cooldown" + this.cooldown + "ticks to send new ball", null);
-
 
                 if (player.squaredDistanceTo(this) < 120 && !this.istame) {
 

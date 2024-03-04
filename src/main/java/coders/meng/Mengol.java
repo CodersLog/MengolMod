@@ -9,9 +9,16 @@ import coders.meng.entity.custom.enderskeleton.SkeletonDragonEntity;
 import coders.meng.entity.custom.nitrocreeper.CreeperDragonEntity;
 import coders.meng.entity.custom.venom.VenomDragonEntity;
 import coders.meng.items.MengolItems;
+import coders.meng.items.custom.itementitys.MutatedEggEntity;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -34,8 +41,21 @@ public class Mengol implements ModInitializer {
 	public static final String MODID = "meng";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 
+	public static final EntityType<MutatedEggEntity> MUTATED_EGG_ENTITY_ENTITY_TYPE = Registry.register(
+			Registry.ENTITY_TYPE,
+			new Identifier(MODID, "mutatedegg"),
+			FabricEntityTypeBuilder.<MutatedEggEntity>create(SpawnGroup.MISC, MutatedEggEntity::new)
+					.dimensions(EntityDimensions.fixed(0.25F, 0.25F))
+					.trackRangeBlocks(4).trackedUpdateRate(10)
+					.build());
+
+
 	@Override
 	public void onInitialize() {
+
+		EntityRendererRegistry.register(Mengol.MUTATED_EGG_ENTITY_ENTITY_TYPE, (context) ->
+				new FlyingItemEntityRenderer(context));
+
 
 		Registry.register(Registry.SOUND_EVENT, CHICKENDRAGONSCREAM, CHICKENDRAGONSCREAMSOUNDEVENT);
 		Registry.register(Registry.SOUND_EVENT, CHICKENDRAGONHURT, CHICKENDRAGONHURTEVENT);

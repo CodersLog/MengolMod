@@ -62,21 +62,6 @@ public class MengolEntities {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //eggs
     public static final EntityType<PigDragonEggEntity> PIGDRAGONEGG = Registry.register(Registry.ENTITY_TYPE,
             new Identifier(Mengol.MODID, "dragonegg"),
