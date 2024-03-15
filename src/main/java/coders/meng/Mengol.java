@@ -6,16 +6,14 @@ import coders.meng.entity.custom.dragon.DragonEntity;
 import coders.meng.entity.custom.endercow.CowDragonEntity;
 import coders.meng.entity.custom.endergolem.GolemDragonEntity;
 import coders.meng.entity.custom.enderskeleton.SkeletonDragonEntity;
+
 import coders.meng.entity.custom.nitrocreeper.CreeperDragonEntity;
 import coders.meng.entity.custom.venom.VenomDragonEntity;
 import coders.meng.items.MengolItems;
 import coders.meng.items.custom.itementitys.MutatedEggEntity;
 import net.fabricmc.api.ModInitializer;
-
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -53,8 +51,7 @@ public class Mengol implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
-		EntityRendererRegistry.register(Mengol.MUTATED_EGG_ENTITY_ENTITY_TYPE, (context) ->
-				new FlyingItemEntityRenderer(context));
+
 
 
 		Registry.register(Registry.SOUND_EVENT, CHICKENDRAGONSCREAM, CHICKENDRAGONSCREAMSOUNDEVENT);
@@ -83,7 +80,7 @@ public class Mengol implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(MengolEntities.SKELETONDRAGONEGG, ChickenDragonEntity.createAttributesChickenDragon());
 
 		//creeper
-		FabricDefaultAttributeRegistry.register(MengolEntities.CREEPERDRAGON, CreeperDragonEntity.createAttributesCreeperDragon());
+		FabricDefaultAttributeRegistry.register(MengolEntities.CREEPERDRAGON, CreeperDragonEntity.createCreeperAttributes());
 		FabricDefaultAttributeRegistry.register(MengolEntities.CREEPERDRAGONEGG, ChickenDragonEntity.createAttributesChickenDragon());
 
 		//venom

@@ -17,13 +17,25 @@ import coders.meng.entity.client.venom.VenomDragonEggRenderer;
 import coders.meng.entity.client.venom.VenomDragonRenderer;
 import coders.meng.event.KeyInputHandler;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.util.Identifier;
+
 
 public class MengolModClient implements ClientModInitializer {
+
+    public static final EntityModelLayer MODEL_DRAGON_LAYER = new EntityModelLayer(new Identifier("dragon", "cube"), "main");
+
     @Override
     public void onInitializeClient() {
 
         KeyInputHandler.register();
+
+        EntityRendererRegistry.register(Mengol.MUTATED_EGG_ENTITY_ENTITY_TYPE, (context) ->
+                new FlyingItemEntityRenderer(context));
 
         //pig
         EntityRendererRegistry.register(MengolEntities.DRAGON, DragonRenderer::new);

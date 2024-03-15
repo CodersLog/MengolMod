@@ -121,14 +121,6 @@ public class ChickenDragonEntity extends AnimalEntity implements IAnimatable{
         }
     }
 
-    boolean isPlayerNear(PlayerEntity player) {
-
-        if(player.squaredDistanceTo(this) < 120) {
-            return true;
-        }
-
-        return false;
-    }
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
@@ -145,6 +137,8 @@ public class ChickenDragonEntity extends AnimalEntity implements IAnimatable{
             this.kill();
 
         }
+
+
 
 
         return super.interactMob(player, hand);

@@ -10,14 +10,14 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
-public class DragonRenderer  extends GeoEntityRenderer<DragonEntity> {
+public class DragonRenderer extends GeoEntityRenderer<DragonEntity> {
     public DragonRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new DragonModel());
         this.shadowRadius = 0.4f;
     }
 
     @Override
-    public Identifier getTextureResource(DragonEntity instance) {
+    public Identifier getTextureLocation(DragonEntity instance) {
         return new Identifier(Mengol.MODID, "textures/entity/dragon.png");
     }
 

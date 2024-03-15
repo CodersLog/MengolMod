@@ -1,10 +1,12 @@
 {
   "itemGroup.meng.mengolgroup": "Mengol Pack",
   "item.meng.syringe": "Syringe",
-  "item.meng.bloodsyringe": "Syringe with blood",
+  "item.meng.pigbloodsyringe": "Syringe with pig blood",
   "key.category.meng.Mengol": "Mengol Keys",
   "key.meng.flyUp": "Dragon fly upward",
   "key.meng.flyDown": "Dragon fly down",
   "key.meng.dragonshoot": "Dragon Shoot",
-  "key.meng.dragonboost": "Boost Dragon"
+  "key.meng.dragonboost": "Boost Dragon",
+  "item.meng.chickenbloodsyringe": "Syringe with chicken blood",
+  "item.meng.mutatedegg" : "Mutated Egg"
 }

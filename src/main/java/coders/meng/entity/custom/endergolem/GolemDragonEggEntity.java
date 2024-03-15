@@ -2,8 +2,12 @@ package coders.meng.entity.custom.endergolem;
 
 import coders.meng.entity.custom.dragon.DragonEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
@@ -25,6 +29,11 @@ public class GolemDragonEggEntity extends AnimalEntity implements IAnimatable {
 
     @Override
     protected void initGoals() {
+
+        this.goalSelector.add(1, new MeleeAttackGoal(this,3,false));
+
+        this.targetSelector.add(1, new ActiveTargetGoal<>(this, HostileEntity.class,true));
+
 
 
     }

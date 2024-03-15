@@ -27,6 +27,13 @@ public class ItemSyringe extends Item {
 
         }
 
+        else if(entity.getType() == EntityType.CHICKEN) {
+
+            stack.setCount(stack.getCount() - 1);
+            user.giveItemStack(MengolItems.CHICKENBLOODSYRINGE.getDefaultStack());
+
+        }
+
 
 
 

@@ -4,6 +4,8 @@ import coders.meng.Mengol;
 import coders.meng.entity.client.enderchicken.ChickenDragonEggModel;
 import coders.meng.entity.custom.enderchicken.ChickenDragonEggEntity;
 import coders.meng.entity.custom.nitrocreeper.CreeperDragonEggEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;

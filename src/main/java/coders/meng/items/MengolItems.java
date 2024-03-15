@@ -1,6 +1,7 @@
 package coders.meng.items;
 
 import coders.meng.Mengol;
+import coders.meng.items.custom.ItemChickenBloodSyringe;
 import coders.meng.items.custom.ItemMutatedEgg;
 import coders.meng.items.custom.ItemPigBloodSyringe;
 import coders.meng.items.custom.ItemSyringe;
@@ -13,6 +14,9 @@ import net.minecraft.util.registry.Registry;
 public class MengolItems {
 
     public static final Item PIGBLOODSYRINGE = registerItems("pigbloodsyringe", new ItemPigBloodSyringe(
+            new FabricItemSettings().group(MengolGroup.MENGOLGROUP)));
+
+    public static final Item CHICKENBLOODSYRINGE = registerItems("chickenbloodsyringe", new ItemChickenBloodSyringe(
             new FabricItemSettings().group(MengolGroup.MENGOLGROUP)));
 
     public static final Item SYRINGE = registerItems("syringe", new ItemSyringe(
