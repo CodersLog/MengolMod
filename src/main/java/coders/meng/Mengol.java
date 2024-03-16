@@ -9,17 +9,28 @@ import coders.meng.entity.custom.enderskeleton.SkeletonDragonEntity;
 
 import coders.meng.entity.custom.nitrocreeper.CreeperDragonEntity;
 import coders.meng.entity.custom.venom.VenomDragonEntity;
+import coders.meng.entity.networking.ModPackets;
 import coders.meng.items.MengolItems;
 import coders.meng.items.custom.itementitys.MutatedEggEntity;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.Event;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
@@ -51,6 +62,7 @@ public class Mengol implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
+		ModPackets.registerC2SPackets();
 
 
 

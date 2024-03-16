@@ -15,24 +15,31 @@ import coders.meng.entity.client.nitrocreeper.CreeperDragonEggRenderer;
 import coders.meng.entity.client.nitrocreeper.CreeperDragonRenderer;
 import coders.meng.entity.client.venom.VenomDragonEggRenderer;
 import coders.meng.entity.client.venom.VenomDragonRenderer;
+import coders.meng.entity.custom.dragon.DragonEntity;
+import coders.meng.entity.networking.ModPackets;
 import coders.meng.event.KeyInputHandler;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
+
+import static coders.meng.event.KeyInputHandler.flyUpKey;
 
 
 public class MengolModClient implements ClientModInitializer {
 
-    public static final EntityModelLayer MODEL_DRAGON_LAYER = new EntityModelLayer(new Identifier("dragon", "cube"), "main");
 
     @Override
     public void onInitializeClient() {
 
         KeyInputHandler.register();
+
+        ModPackets.registerS2CPackets();
 
         EntityRendererRegistry.register(Mengol.MUTATED_EGG_ENTITY_ENTITY_TYPE, (context) ->
                 new FlyingItemEntityRenderer(context));
